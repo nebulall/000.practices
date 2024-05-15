@@ -1,0 +1,16 @@
+include_guard() #引用守卫，保证不重复调用
+function(print_list content)
+    message(${content})
+    set(result_list "")
+    set(separator_char " | ")
+    foreach(element ${content})
+        list(APPEND result_list ${element})
+        list(APPEND result_list ${separator_char})
+    endforeach()
+    #清除最后一个分隔元素
+    list(LENGTH result_list result_length)
+    math(EXPR m_result_length "${result_length}-1")
+    message("删除的元素下标：" ${m_result_length})
+    list(REMOVE_AT result_list ${m_result_length})
+    message(${result_list}) 
+endfunction()
